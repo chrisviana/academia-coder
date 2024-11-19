@@ -1,24 +1,18 @@
-function App() {
-
-  const x = "Teste"
-  console.log(x)
-  return (
-    <div>
-      <h1>Hello Turma!</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci impedit ipsa totam culpa vero voluptatum voluptatem vel doloribus ratione temporibus, laudantium dolor obcaecati aliquid cupiditate libero officia. Impedit, dolores expedita.
-
-      </p>
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-      </ul>
-      <form>
-        <input type="text" name="name" />
-      </form>
-    </div>
-   
-  )
+import './style.css'
+import { InputDefult, ContainerLogin, FormLogin } from './ui/login'
+export function App() {
+	return (
+		<ContainerLogin>
+			<p>Imagem</p>
+			<div>
+				<FormLogin>
+					<label>email</label>
+					<InputDefult type="email" name="email" />
+					<label>senha</label>
+					<InputDefult type="password" name="password" />
+					<button>Login</button>
+				</FormLogin>
+			</div>
+		</ContainerLogin>
+	)
 }
-
-export default App
