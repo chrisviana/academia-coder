@@ -4,12 +4,16 @@ import { App } from './App.jsx'
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/theme/default.js'
 import { GlobalStyle } from './styles/global.js'
+import { Theme } from '@radix-ui/themes'
+import '@radix-ui/themes/styles.css'
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
 		<ThemeProvider theme={defaultTheme}>
 			<GlobalStyle />
-			<App />
+			<Theme>
+				<App />
+			</Theme>
 		</ThemeProvider>
 	</StrictMode>
 )
