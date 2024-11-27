@@ -1,9 +1,17 @@
-export const Lista = ({ name1, name2, name3 }) => {
+export const Lista = ({ alunos }) => {
 	return (
-		<ul>
-			<li>{name1}</li>
-			<li>{name2}</li>
-			<li>{name3}</li>
-		</ul>
+		<div>
+			{alunos.length === 0 ? (
+				<p>Não há alunos cadastrados.</p>
+			) : (
+				<ul>
+					{alunos.map((aluno, index) => (
+						<li key={index}>
+							{aluno.nome} - {aluno.idade} anos
+						</li>
+					))}
+				</ul>
+			)}
+		</div>
 	)
 }
