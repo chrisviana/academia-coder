@@ -6,7 +6,7 @@ import './style.css'
 export function App() {
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			<Alunos />
 			{/* <Login /> */}
 		</>

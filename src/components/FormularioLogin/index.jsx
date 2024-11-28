@@ -1,8 +1,19 @@
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { ContainerLogin, FormLogin, Logo } from './style'
+import { useState } from 'react'
 
 export const FormaularioLogin = () => {
+	const [email, setEmail] = useState('')
+	const [senha, setSenha] = useState('')
+
+	function login(event) {
+		event.preventDefault()
+		if (email != '') {
+			console.log('Login efetuado...')
+		}
+	}
+
 	return (
 		<ContainerLogin>
 			<Logo>
@@ -18,12 +29,22 @@ export const FormaularioLogin = () => {
 				Academia CoderHouse
 			</Logo>
 			<div>
-				<FormLogin>
+				<FormLogin onSubmit={login}>
 					<label>E-mail</label>
-					<Input type="email" name="email" placeholder="Digite seu email" />
+					<Input
+						type="email"
+						name="email"
+						placeholder="Digite seu email"
+						onChange={(event) => setEmail(event.target.value)}
+					/>
 					<label>Senha</label>
-					<Input type="password" name="senha" placeholder="Digte sua senha" />
-					<Button>Login</Button>
+					<Input
+						type="password"
+						name="senha"
+						placeholder="Digte sua senha"
+						onChange={(event) => setSenha(event.target.value)}
+					/>
+					<Button type="submit">Login</Button>
 				</FormLogin>
 			</div>
 		</ContainerLogin>

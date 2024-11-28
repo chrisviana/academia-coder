@@ -1,6 +1,23 @@
 import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes'
 
-export const ModalCadastroDeAluno = () => {
+export const ModalCadastroDeAluno = ({
+	setInfoAluno,
+	infoAluno,
+	addAlunos
+}) => {
+	function handleChange(event) {
+		const { name, value } = event.target
+		setInfoAluno((prevInfoAluno) => ({
+			...prevInfoAluno,
+			[name]: value
+		}))
+	}
+
+	function handleSubmit(event) {
+		event.preventDefault()
+		addAlunos(infoAluno)
+	}
+
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger>
@@ -15,25 +32,31 @@ export const ModalCadastroDeAluno = () => {
 						<Text as="div" size="2" mb="1" weight="bold">
 							Nome
 						</Text>
-						<TextField.Root placeholder="Digite um nome" />
+						<TextField.Root
+							placeholder="Digite um nome"
+							name="nome"
+							onChange={handleChange}
+						/>
 					</label>
 					<label>
 						<Text as="div" size="2" mb="1" weight="bold">
 							Idade
 						</Text>
-						<TextField.Root placeholder="Digite a idade" />
-					</label>
-					<label>
-						<Text as="div" size="2" mb="1" weight="bold">
-							Endereço
-						</Text>
-						<TextField.Root placeholder="Digite o endereço" />
+						<TextField.Root
+							placeholder="Digite a idade"
+							name="idade"
+							onChange={handleChange}
+						/>
 					</label>
 					<label>
 						<Text as="div" size="2" mb="1" weight="bold">
 							Instrutor
 						</Text>
-						<TextField.Root placeholder="Digite seu nome" />
+						<TextField.Root
+							placeholder="Digite seu nome"
+							name="instrutor"
+							onChange={handleChange}
+						/>
 					</label>
 				</Flex>
 
@@ -44,7 +67,7 @@ export const ModalCadastroDeAluno = () => {
 						</Button>
 					</Dialog.Close>
 					<Dialog.Close>
-						<Button>Salvar</Button>
+						<Button onClick={handleSubmit}>Salvar</Button>
 					</Dialog.Close>
 				</Flex>
 			</Dialog.Content>
