@@ -1,3 +1,4 @@
+import { Route, Routes } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Alunos } from './pages/Alunos'
 import { Exericio } from './pages/Exercicio'
@@ -6,11 +7,13 @@ import './style.css'
 
 export function App() {
 	return (
-		<>
-			{/* <Header /> */}
-			<Alunos />
-			{/* <Login /> */}
-			<Exericio />
-		</>
+		<Routes>
+			<Route path="/" element={<Login />} />
+
+			<Route path="/app" element={<Header />}>
+				<Route index element={<Alunos />} />
+				<Route path="exercicio" element={<Exericio />} />
+			</Route>
+		</Routes>
 	)
 }

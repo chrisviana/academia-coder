@@ -6,14 +6,17 @@ import { defaultTheme } from './styles/theme/default.js'
 import { GlobalStyle } from './styles/global.js'
 import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
+import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
-		<ThemeProvider theme={defaultTheme}>
-			<GlobalStyle />
-			<Theme>
-				<App />
-			</Theme>
-		</ThemeProvider>
+		<BrowserRouter>
+			<ThemeProvider theme={defaultTheme}>
+				<GlobalStyle />
+				<Theme>
+					<App />
+				</Theme>
+			</ThemeProvider>
+		</BrowserRouter>
 	</StrictMode>
 )
