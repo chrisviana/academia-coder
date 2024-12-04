@@ -1,5 +1,5 @@
 import { ButtonContainer } from './style'
 
-export const Button = ({ children }) => {
-	return <ButtonContainer>{children}</ButtonContainer>
+export const Button = ({ children, ...rest }) => {
+	return <ButtonContainer {...rest}>{children}</ButtonContainer>
 }

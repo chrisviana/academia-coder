@@ -6,5 +6,5 @@ export const ContainerInput = styled.input`
 	padding: 16px;
 	border-radius: 6px;
 	border: none;
-	border: 1px solid #ccc;
+	border: 1px solid ${(props) => props.theme.colors.border};
 `

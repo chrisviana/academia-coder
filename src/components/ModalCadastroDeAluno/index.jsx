@@ -1,10 +1,14 @@
 import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes'
+import { useState } from 'react'
+import { ButtonCadastrarAluno } from './style'
 
 export const ModalCadastroDeAluno = ({
 	setInfoAluno,
 	infoAluno,
 	addAlunos
 }) => {
+	const [open, setOpen] = useState(false)
+
 	function handleChange(event) {
 		const { name, value } = event.target
 		setInfoAluno((prevInfoAluno) => ({
@@ -16,12 +20,15 @@ export const ModalCadastroDeAluno = ({
 	function handleSubmit(event) {
 		event.preventDefault()
 		addAlunos(infoAluno)
+		setOpen(false)
 	}
 
 	return (
-		<Dialog.Root>
+		<Dialog.Root open={open} onOpenChange={setOpen}>
 			<Dialog.Trigger>
-				<Button>Cadastrar Aluno</Button>
+				<ButtonCadastrarAluno onClick={() => setOpen(true)}>
+					Cadastrar Aluno
+				</ButtonCadastrarAluno>
 			</Dialog.Trigger>
 
 			<Dialog.Content maxWidth="450px">
@@ -36,6 +43,7 @@ export const ModalCadastroDeAluno = ({
 							placeholder="Digite um nome"
 							name="nome"
 							onChange={handleChange}
+							value={infoAluno.nome || ''}
 						/>
 					</label>
 					<label>
@@ -46,6 +54,7 @@ export const ModalCadastroDeAluno = ({
 							placeholder="Digite a idade"
 							name="idade"
 							onChange={handleChange}
+							value={infoAluno.idade || ''}
 						/>
 					</label>
 					<label>
@@ -56,6 +65,7 @@ export const ModalCadastroDeAluno = ({
 							placeholder="Digite seu nome"
 							name="instrutor"
 							onChange={handleChange}
+							value={infoAluno.instrutor || ''}
 						/>
 					</label>
 				</Flex>

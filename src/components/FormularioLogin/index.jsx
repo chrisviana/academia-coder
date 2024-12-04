@@ -12,6 +12,8 @@ export const FormaularioLogin = () => {
 		if (email != '') {
 			console.log('Login efetuado...')
 		}
+		setEmail('')
+		setSenha('')
 	}
 
 	return (
@@ -36,6 +38,7 @@ export const FormaularioLogin = () => {
 						name="email"
 						placeholder="Digite seu email"
 						onChange={(event) => setEmail(event.target.value)}
+						value={email}
 					/>
 					<label>Senha</label>
 					<Input
@@ -43,6 +46,7 @@ export const FormaularioLogin = () => {
 						name="senha"
 						placeholder="Digte sua senha"
 						onChange={(event) => setSenha(event.target.value)}
+						value={senha}
 					/>
 					<Button type="submit">Login</Button>
 				</FormLogin>
