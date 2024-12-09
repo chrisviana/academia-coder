@@ -1,26 +1,30 @@
+import { toast } from 'react-toastify'
 import { signInAuthUserWithEmailPassword } from '../../utils/firebase'
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { ContainerLogin, FormLogin, Logo } from './style'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const FormaularioLogin = () => {
 	const [email, setEmail] = useState('')
 	const [senha, setSenha] = useState('')
+
+	const navigate = useNavigate()
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
 
 		try {
 			const { user } = await signInAuthUserWithEmailPassword(email, senha)
-			console.log(user)
+			if (user) {
+				toast.success('Login efetuado com sucesso !')
+				navigate('/app')
+			}
 		} catch (erro) {
 			switch (erro.code) {
-				case 'auth/user-not-found':
-					alert('No user associated with this email')
-					break
-				case 'auth/wrong-password':
-					alert('Incorrect password for email')
+				case 'auth/invalid-credential':
+					toast.error('Senha ou e-mail invalidos')
 					break
 				default:
 					console.log(erro)
