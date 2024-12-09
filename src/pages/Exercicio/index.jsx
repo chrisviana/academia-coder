@@ -3,7 +3,7 @@ import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
 import { ContainerExericio, ContentExercicio } from './style'
 
-export const Exericio = () => {
+export const Exercicio = () => {
 	const [nome, setNome] = useState('')
 	const [serie, setSerie] = useState(0)
 	const [repeticoes, setRepeticoes] = useState(0)

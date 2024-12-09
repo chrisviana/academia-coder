@@ -10,4 +10,8 @@ export const ContentExercicio = styled.div`
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 32px;
+
+	> div:first-child {
+		width: 57%;
+	}
 `

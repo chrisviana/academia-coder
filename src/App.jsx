@@ -1,16 +1,21 @@
+import { Route, Routes } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Alunos } from './pages/Alunos'
-import { Exericio } from './pages/Exercicio'
+import { Exercicio } from './pages/Exercicio'
 import { Login } from './pages/Login'
 import './style.css'
+import { EditarAluno } from './pages/Alunos/Editar'
 
 export function App() {
 	return (
-		<>
-			{/* <Header /> */}
-			<Alunos />
-			{/* <Login /> */}
-			<Exericio />
-		</>
+		<Routes>
+			<Route path="/" element={<Login />} />
+
+			<Route path="/app" element={<Header />}>
+				<Route index element={<Alunos />} />
+				<Route path="editar/:id" element={<EditarAluno />} />
+				<Route path="exercicio" element={<Exercicio />} />
+			</Route>
+		</Routes>
 	)
 }
