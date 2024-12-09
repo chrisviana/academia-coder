@@ -1,3 +1,4 @@
+import { signInAuthUserWithEmailPassword } from '../../utils/firebase'
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { ContainerLogin, FormLogin, Logo } from './style'
@@ -7,13 +8,24 @@ export const FormaularioLogin = () => {
 	const [email, setEmail] = useState('')
 	const [senha, setSenha] = useState('')
 
-	function login(event) {
+	const handleSubmit = async (event) => {
 		event.preventDefault()
-		if (email != '') {
-			console.log('Login efetuado...')
+
+		try {
+			const { user } = await signInAuthUserWithEmailPassword(email, senha)
+			console.log(user)
+		} catch (erro) {
+			switch (erro.code) {
+				case 'auth/user-not-found':
+					alert('No user associated with this email')
+					break
+				case 'auth/wrong-password':
+					alert('Incorrect password for email')
+					break
+				default:
+					console.log(erro)
+			}
 		}
-		setEmail('')
-		setSenha('')
 	}
 
 	return (
@@ -31,7 +43,7 @@ export const FormaularioLogin = () => {
 				Academia CoderHouse
 			</Logo>
 			<div>
-				<FormLogin onSubmit={login}>
+				<FormLogin onSubmit={handleSubmit}>
 					<label>E-mail</label>
 					<Input
 						type="email"
