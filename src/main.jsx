@@ -5,8 +5,11 @@ import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/theme/default.js'
 import { GlobalStyle } from './styles/global.js'
 import { Theme } from '@radix-ui/themes'
-import '@radix-ui/themes/styles.css'
 import { BrowserRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+
+import '@radix-ui/themes/styles.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
@@ -15,6 +18,7 @@ createRoot(document.getElementById('root')).render(
 				<GlobalStyle />
 				<Theme>
 					<App />
+					<ToastContainer />
 				</Theme>
 			</ThemeProvider>
 		</BrowserRouter>

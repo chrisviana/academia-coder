@@ -2,18 +2,36 @@ import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { ContainerLogin, FormLogin, Logo } from './style'
 import { useState } from 'react'
+import { signInAuthUserWithEmailPassword } from '../../utils/firebase'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 export const FormaularioLogin = () => {
 	const [email, setEmail] = useState('')
 	const [senha, setSenha] = useState('')
 
-	function login(event) {
+	const navigate = useNavigate()
+
+	const handleSubmit = async (event) => {
 		event.preventDefault()
-		if (email != '') {
-			console.log('Login efetuado...')
+
+		try {
+			const { user } = await signInAuthUserWithEmailPassword(email, senha)
+			if (user) {
+				toast.success('Login efetuado com sucesso')
+				navigate('/app')
+				setEmail('')
+				setSenha('')
+			}
+		} catch (error) {
+			switch (error.code) {
+				case 'auth/invalid-credential':
+					toast.error('E-mail ou senha invalidos')
+					break
+				default:
+					console.log(error)
+			}
 		}
-		setEmail('')
-		setSenha('')
 	}
 
 	return (
@@ -31,7 +49,7 @@ export const FormaularioLogin = () => {
 				Academia CoderHouse
 			</Logo>
 			<div>
-				<FormLogin onSubmit={login}>
+				<FormLogin onSubmit={handleSubmit}>
 					<label>E-mail</label>
 					<Input
 						type="email"
