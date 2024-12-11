@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify'
 import '@radix-ui/themes/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { UserProvider } from './context/user.context'
+import { GrupoProvaider } from './context/GrupoContex.jsx'
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
@@ -19,7 +20,9 @@ createRoot(document.getElementById('root')).render(
 				<ThemeProvider theme={defaultTheme}>
 					<GlobalStyle />
 					<Theme>
-						<App />
+						<GrupoProvaider>
+							<App />
+						</GrupoProvaider>
 						<ToastContainer />
 					</Theme>
 				</ThemeProvider>

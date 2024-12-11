@@ -17,6 +17,9 @@ export const Header = () => {
 						<NavLink to="/app">Alunos</NavLink>
 					</li>
 					<li>
+						<NavLink to="grupo">Grupo</NavLink>
+					</li>
+					<li>
 						<NavLink to="exercicio">Exercicios</NavLink>
 					</li>
 					<li>Treinos</li>

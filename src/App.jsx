@@ -8,11 +8,10 @@ import { EditarAluno } from './pages/Alunos/Editar'
 import { CadastroUsuario } from './pages/CadastroUsuario'
 import { useContext } from 'react'
 import { UserContext } from './context/user.context'
+import { Grupo } from './pages/Grupo'
 
 export function App() {
 	const { currentUser } = useContext(UserContext)
-
-	console.log('ok', currentUser)
 
 	return (
 		<Routes>
@@ -33,6 +32,7 @@ export function App() {
 				{/* Sub-rotas protegidas */}
 				<Route index element={<Alunos />} />
 				<Route path="editar/:id" element={<EditarAluno />} />
+				<Route path="grupo" element={<Grupo />} />
 				<Route path="exercicio" element={<Exercicio />} />
 			</Route>
 		</Routes>
