@@ -10,17 +10,20 @@ import { ToastContainer } from 'react-toastify'
 
 import '@radix-ui/themes/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
+import { UserProvider } from './context/user.context'
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
-		<BrowserRouter>
-			<ThemeProvider theme={defaultTheme}>
-				<GlobalStyle />
-				<Theme>
-					<App />
-					<ToastContainer />
-				</Theme>
-			</ThemeProvider>
-		</BrowserRouter>
+		<UserProvider>
+			<BrowserRouter>
+				<ThemeProvider theme={defaultTheme}>
+					<GlobalStyle />
+					<Theme>
+						<App />
+						<ToastContainer />
+					</Theme>
+				</ThemeProvider>
+			</BrowserRouter>
+		</UserProvider>
 	</StrictMode>
 )
