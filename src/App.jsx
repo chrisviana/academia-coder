@@ -9,6 +9,7 @@ import { CadastroUsuario } from './pages/CadastroUsuario'
 import { useContext } from 'react'
 import { UserContext } from './context/user.context'
 import { Grupo } from './pages/Grupo'
+import { Treino } from './pages/Treino'
 
 export function App() {
 	const { currentUser } = useContext(UserContext)
@@ -34,6 +35,7 @@ export function App() {
 				<Route path="editar/:id" element={<EditarAluno />} />
 				<Route path="grupo" element={<Grupo />} />
 				<Route path="exercicio" element={<Exercicio />} />
+				<Route path="treino" element={<Treino />} />
 			</Route>
 		</Routes>
 	)

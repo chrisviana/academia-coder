@@ -22,7 +22,9 @@ export const Header = () => {
 					<li>
 						<NavLink to="exercicio">Exercicios</NavLink>
 					</li>
-					<li>Treinos</li>
+					<li>
+						<NavLink to="treino">Treinos</NavLink>
+					</li>
 					<button onClick={singOut}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
