@@ -1,6 +1,13 @@
 import { createContext } from 'react'
 import { app } from '../utils/firebase'
-import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore'
+import {
+	addDoc,
+	collection,
+	doc,
+	getDocs,
+	getFirestore,
+	updateDoc
+} from 'firebase/firestore'
 import { toast } from 'react-toastify'
 const GrupoContext = createContext({})
 
@@ -20,11 +27,24 @@ const GrupoProvider = ({ children }) => {
 	const getGrupo = async () => {
 		const grupoCollection = collection(firestore, 'grupos')
 		const grupoSnapshot = await getDocs(grupoCollection)
-		const grupoList = grupoSnapshot.docs.map((doc) => doc.data())
+		const grupoList = grupoSnapshot.docs.map((doc) => ({
+			id: doc.id,
+			...doc.data()
+		}))
 		return grupoList
 	}
 
-	const value = { saveGrupo }
+	const editarGrupo = async (id, infoAluno) => {
+		const grupoRef = doc(firestore, 'grupos', id)
+		try {
+			await updateDoc(grupoRef, infoAluno)
+			toast.success('Grupo atualizado com sucesso!')
+		} catch (error) {
+			toast.error('Erro ao editar grupo:', error)
+		}
+	}
+
+	const value = { saveGrupo, getGrupo, editarGrupo }
 
 	return <GrupoContext.Provider value={value}>{children}</GrupoContext.Provider>
 }
