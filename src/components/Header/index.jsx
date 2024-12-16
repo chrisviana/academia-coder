@@ -1,13 +1,9 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { signOutUser } from '../../utils/firebase'
+import { useContext } from 'react'
+import { NavLink, Outlet } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 
 export const Header = () => {
-	const navigate = useNavigate()
-
-	const singOut = () => {
-		signOutUser()
-		navigate('/')
-	}
+	const { signOutUser } = useContext(AuthContext)
 	return (
 		<>
 			<nav>
@@ -21,7 +17,7 @@ export const Header = () => {
 						<NavLink to="exercicio">Exercicios</NavLink>
 					</li>
 					<li>Treinos</li>
-					<button onClick={singOut}>
+					<button onClick={signOutUser}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="32"

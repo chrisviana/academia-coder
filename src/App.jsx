@@ -6,12 +6,13 @@ import { Login } from './pages/Login'
 import './style.css'
 import { EditarAluno } from './pages/Alunos/Editar'
 import { CadastroUsuario } from './pages/CadastroUsuario'
-import { useContext } from 'react'
-import { UserContext } from './context/UserContext'
 import { Grupo } from './pages/Grupo'
 
 export function App() {
-	const { currentUser } = useContext(UserContext)
+	function PrivateRoute({ children }) {
+		const token = localStorage.getItem('@academiacoder.token')
+		return token ? <>{children}</> : <Navigate to="/" />
+	}
 
 	return (
 		<Routes>
@@ -20,7 +21,11 @@ export function App() {
 
 			<Route
 				path="/app"
-				element={currentUser ? <Header /> : <Navigate to="/" replace />}
+				element={
+					<PrivateRoute>
+						<Header />
+					</PrivateRoute>
+				}
 			>
 				<Route index element={<Alunos />} />
 				<Route path="editar/:id" element={<EditarAluno />} />

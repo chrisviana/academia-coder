@@ -7,16 +7,16 @@ import { GlobalStyle } from './styles/global.js'
 import { Theme } from '@radix-ui/themes'
 import { BrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { UserProvider } from './context/UserContext.jsx'
 
 import '@radix-ui/themes/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { GrupoProvider } from './context/GrupoContext.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
-		<UserProvider>
-			<BrowserRouter>
+		<BrowserRouter>
+			<AuthProvider>
 				<ThemeProvider theme={defaultTheme}>
 					<GlobalStyle />
 					<Theme>
@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')).render(
 						<ToastContainer />
 					</Theme>
 				</ThemeProvider>
-			</BrowserRouter>
-		</UserProvider>
+			</AuthProvider>
+		</BrowserRouter>
 	</StrictMode>
 )
