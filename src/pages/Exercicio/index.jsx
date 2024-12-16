@@ -1,12 +1,18 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
 import { ContainerExericio, ContentExercicio } from './style'
+import { GrupoContext } from '../../context/GrupoContext'
 
 export const Exercicio = () => {
+	const { getGrupo } = useContext(GrupoContext)
 	const [nome, setNome] = useState('')
 	const [serie, setSerie] = useState(0)
 	const [repeticoes, setRepeticoes] = useState(0)
+
+	useEffect(() => {
+		const listaDeGrupo = getGrupo()
+	}, [])
 
 	function salvarExercicio() {
 		const exercicio = {
