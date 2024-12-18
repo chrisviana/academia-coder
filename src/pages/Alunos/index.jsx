@@ -1,23 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Lista } from '../../components/Lista'
 import { ModalCadastroDeAluno } from '../../components/ModalCadastroDeAluno'
 import * as Style from './style'
+import { AlunoContext } from '../../context/AlunoContext'
 
 export const Alunos = () => {
+	const { saveAluno, getAluno } = useContext(AlunoContext)
+
 	const [infoAluno, setInfoAluno] = useState({})
 	const [alunos, setAlunos] = useState([])
 
 	useEffect(() => {
-		const alunosExistentes = JSON.parse(localStorage.getItem('alunos')) || []
-		setAlunos(alunosExistentes)
+		getAluno().then((alunosList) => {
+			setAlunos(alunosList)
+		})
 	}, [])
 
-	const addAlunos = async (novoAluno) => {
-		const alunosAtualizados = [...alunos, novoAluno]
-		await setAlunos(alunosAtualizados)
+	console.log(alunos)
 
+	const addAlunos = async (novoAluno) => {
+		await saveAluno(novoAluno)
 		setInfoAluno({})
-		localStorage.setItem('alunos', JSON.stringify(alunosAtualizados))
 	}
 
 	return (

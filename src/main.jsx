@@ -12,6 +12,8 @@ import '@radix-ui/themes/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { GrupoProvider } from './context/GrupoContext.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
+import { ExercicioProvaider } from './context/ExericicioContext.jsx'
+import { AlunoProvider } from './context/AlunoContext.jsx'
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
@@ -20,9 +22,13 @@ createRoot(document.getElementById('root')).render(
 				<ThemeProvider theme={defaultTheme}>
 					<GlobalStyle />
 					<Theme>
-						<GrupoProvider>
-							<App />
-						</GrupoProvider>
+						<AlunoProvider>
+							<ExercicioProvaider>
+								<GrupoProvider>
+									<App />
+								</GrupoProvider>
+							</ExercicioProvaider>
+						</AlunoProvider>
 						<ToastContainer />
 					</Theme>
 				</ThemeProvider>

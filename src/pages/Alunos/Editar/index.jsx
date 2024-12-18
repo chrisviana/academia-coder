@@ -1,19 +1,27 @@
 import { Button, Flex, Text, TextField } from '@radix-ui/themes'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { AlunoContext } from '../../../context/AlunoContext'
 
 export const EditarAluno = () => {
+	const { getAlunoById, editarAluno } = useContext(AlunoContext)
 	const { id } = useParams()
 	const navigate = useNavigate()
 
 	const [aluno, setAluno] = useState(null)
 
 	useEffect(() => {
-		const alunosExistentes = JSON.parse(localStorage.getItem('alunos')) || []
-		const alunoEditado = alunosExistentes.find((aluno) => aluno.id === id)
-		setAluno(alunoEditado)
-	}, [id])
+		// Chama a função para pegar o aluno pelo ID
+		const fetchAluno = async () => {
+			const alunoData = await getAlunoById(id)
+			if (alunoData) {
+				setAluno(alunoData)
+			}
+		}
+		fetchAluno()
+	}, [id, getAlunoById])
 
+	console.log(aluno)
 	if (!aluno) {
 		return <p>Aluno não encontrado 😭</p>
 	}
@@ -26,13 +34,9 @@ export const EditarAluno = () => {
 		}))
 	}
 
-	const handleSubmit = (event) => {
-		event.preventDefault
-		const alunosExistentes = JSON.parse(localStorage.getItem('alunos')) || []
-		const alunosAtulizados = alunosExistentes.map((a) =>
-			a.id === id ? aluno : a
-		)
-		localStorage.setItem('alunos', JSON.stringify(alunosAtulizados))
+	const handleSubmit = async (event) => {
+		event.preventDefault()
+		await editarAluno(id, aluno)
 		navigate('/app')
 	}
 
@@ -73,7 +77,7 @@ export const EditarAluno = () => {
 					<Button variant="soft" color="gray" onClick={() => navigate('/app')}>
 						Cancelar
 					</Button>
-					<Button type="submite">Salvar</Button>
+					<Button type="submit">Salvar</Button>
 				</Flex>
 			</form>
 		</div>

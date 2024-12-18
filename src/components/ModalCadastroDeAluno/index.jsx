@@ -1,7 +1,6 @@
 import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes'
 import { useState } from 'react'
 import { ButtonCadastrarAluno } from './style'
-import { v4 as uuidv4 } from 'uuid'
 
 export const ModalCadastroDeAluno = ({
 	setInfoAluno,
@@ -14,8 +13,7 @@ export const ModalCadastroDeAluno = ({
 		const { name, value } = event.target
 		setInfoAluno((prevInfoAluno) => ({
 			...prevInfoAluno,
-			[name]: value,
-			id: uuidv4()
+			[name]: value
 		}))
 	}
 
@@ -57,6 +55,17 @@ export const ModalCadastroDeAluno = ({
 							name="idade"
 							onChange={handleChange}
 							value={infoAluno.idade || ''}
+						/>
+					</label>
+					<label>
+						<Text as="div" size="2" mb="1" weight="bold">
+							Usuario
+						</Text>
+						<TextField.Root
+							placeholder="Digite um usuário"
+							name="usuario"
+							onChange={handleChange}
+							value={infoAluno.usuario || ''}
 						/>
 					</label>
 					<label>

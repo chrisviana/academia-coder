@@ -8,7 +8,8 @@ export const Grupo = () => {
 	const [grupoList, setGrupoList] = useState([])
 	const [grupoEditado, setGrupoEditado] = useState(null)
 
-	const { saveGrupo, getGrupo, editarGrupo } = useContext(GrupoContext)
+	const { saveGrupo, getGrupo, editarGrupo, deletarGrupo } =
+		useContext(GrupoContext)
 
 	useEffect(() => {
 		getGrupo().then((grupoList) => {
@@ -51,6 +52,12 @@ export const Grupo = () => {
 		setGrupoEditado(grupo)
 	}
 
+	const handleDeleteGrupo = async (id) => {
+		await deletarGrupo(id)
+		const grupoList = await getGrupo()
+		setGrupoList(grupoList)
+	}
+
 	return (
 		<div>
 			<h1>Cadastro de Grupo</h1>
@@ -69,7 +76,11 @@ export const Grupo = () => {
 					{grupoEditado ? 'Atualizar' : 'Cadastrar'}
 				</button>
 			</form>
-			<ListaDeGrupo grupos={grupoList} handleEdit={handleEdit} />
+			<ListaDeGrupo
+				grupos={grupoList}
+				handleEdit={handleEdit}
+				handleDeleteGrupo={handleDeleteGrupo}
+			/>
 		</div>
 	)
 }
