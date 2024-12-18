@@ -1,11 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import {
-	createUserWithEmailAndPassword,
-	getAuth,
-	onAuthStateChanged,
-	signInWithEmailAndPassword,
-	signOut
-} from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_API_KEY,
@@ -20,19 +14,8 @@ export const app = initializeApp(firebaseConfig)
 
 export const auth = getAuth()
 
-export const signInAuthUserWithEmailPassword = async (email, password) => {
-	if (!email || !password) return
-
-	return await signInWithEmailAndPassword(auth, email, password)
-}
-
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
 	if (!email || !password) return
 
 	return await createUserWithEmailAndPassword(auth, email, password)
 }
-
-export const signOutUser = async () => await signOut(auth)
-
-export const onAuthStateChangeListerner = (callback) =>
-	onAuthStateChanged(auth, callback)

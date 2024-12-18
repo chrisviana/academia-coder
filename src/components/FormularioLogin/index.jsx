@@ -1,28 +1,23 @@
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { ContainerLogin, FormLogin, Logo } from './style'
-import { useState } from 'react'
-import { signInAuthUserWithEmailPassword } from '../../utils/firebase'
+import { useContext, useState } from 'react'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 
 export const FormaularioLogin = () => {
 	const [email, setEmail] = useState('')
 	const [senha, setSenha] = useState('')
 
-	const navigate = useNavigate()
+	const { signIn } = useContext(AuthContext)
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
 
 		try {
-			const { user } = await signInAuthUserWithEmailPassword(email, senha)
-			if (user) {
-				toast.success('Login efetuado com sucesso')
-				navigate('/app')
-				setEmail('')
-				setSenha('')
-			}
+			signIn(email, senha)
+			setEmail('')
+			setSenha('')
 		} catch (error) {
 			switch (error.code) {
 				case 'auth/invalid-credential':
